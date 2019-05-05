@@ -4,7 +4,7 @@ from pymol import cmd
 
 objs = cmd.get_object_list()
 
-n_frame_per_obj = 5
+n_frame_per_obj = 20
 
 # Initialize the frames
 
@@ -33,3 +33,7 @@ for i, obj in enumerate(objs):
 
     cmd.scene(key=obj + '_scene', action='recall')
     cmd.mview(action='store', first=frame_start)
+
+# Set the last frame to avoid cycle
+
+cmd.mview(action='store', first=n_frame_per_obj * len(objs))
